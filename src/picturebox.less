@@ -1,0 +1,154 @@
+// productbox
+// DOM:
+// <div class="picture-box">
+//   <div class="viewport"></div>
+//   <ol class="pictures"><li></li>...</ol>
+//   <div class="toolbar"></div>
+// </div>
+
+@boxBackground:           #FFF;
+@boxBackgroundZoomin:     #333;
+
+@thumbBorderColor:        #FFF;
+@thumbWidth:              60px;
+@thumbHeight:             60px;
+
+@viewportShadow:          0 0 10px #000;
+@viewportRadius:          5px;
+@viewportWidth:           600px;
+@viewportHeight:          600px;
+@viewportWidthZoomin:     800px;
+@viewportHeightZoomin:    600px;
+
+@loadingImage:            url(picture-box-loading.gif);
+@loadingImageWidth:       32px;
+@loadingImageHeight:      32px;
+
+@buttonWidth:             16px;
+@buttonHeight:            16px;
+@buttonSprites:           url(picture-box-buttons.png);
+
+//mixins
+.inline-block(){
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+.box-shadow(@shadow) {
+  -webkit-box-shadow: @shadow;
+  -moz-box-shadow: @shadow;
+  -ms-box-shadow: @shadow;
+  -o-box-shadow: @shadow;
+  box-shadow: @shadow;
+}
+
+.border-radius(@radius) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -ms-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.size(@w, @h){
+  width: @w;
+  height: @h;
+}
+
+//.picture-box
+.picture-box{
+  background: @boxBackground;
+
+  .pictures{
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+
+    ul, ol{
+      .inline-block;
+      margin: 0;
+      padding: 1em 0;
+      li{
+       .inline-block;
+        .size(@thumbWidth, @thumbHeight);
+        margin: 10px 5px;
+        cursor: pointer;
+        border: 1px solid @boxBackgroundZoomin;
+
+        &.active{
+          border-color: @thumbBorderColor;
+        }
+      }
+    }
+  }
+
+  .viewport{
+    .size(@viewportWidth, @viewportHeight);
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    margin: auto;
+
+    .loading{
+      display: none;
+      .size(@loadingImageWidth, @loadingImageHeight);
+      background-image: @loadingImage;
+      position: absolute;
+      top: 1em;
+      right: 1em;
+    }
+  }
+
+  .toolbar{
+    text-align: center;
+    padding: 5px;
+
+    a.prev, a.next, a.zoom{
+      .inline-block;
+      .size(@buttonWidth, @buttonHeight);
+      background: transparent @buttonSprites no-repeat;
+      margin: auto 1em;
+      font: ~"0/0" f;
+      border: 0;
+      overflow: hidden;
+    }
+    a.prev{
+      background-position: 0 0;
+    }
+    a.next{
+      background-position: -1*@buttonWidth 0;
+    }
+    a.zoom{
+      background-position: -2*@buttonWidth 0;
+    }
+  }
+
+  &.zoomin{
+    position: absolute;
+    background-color: @boxBackgroundZoomin;
+    z-index: 9999;
+
+    .pictures{
+      display: block;
+    }
+    .viewport{
+      margin-top: 3em;
+      .size(@viewportWidthZoomin, @viewportHeightZoomin);
+      .border-radius(@viewportRadius);
+      .box-shadow(@viewportShadow);
+    }
+    .toolbar{
+      a.prev{
+        background-position: 0 -1*@buttonHeight;
+      }
+      a.next{
+        background-position: -1*@buttonWidth -1*@buttonHeight;
+      }
+      a.zoom{
+        background-position: -2*@buttonWidth -1*@buttonHeight;
+      }
+    }
+  }
+}

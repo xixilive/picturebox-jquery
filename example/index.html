@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Picturebox Example</title>
+  <script src="../libs/jquery/jquery.js"></script>
+  <link rel="stylesheet" href="../dist/picturebox.css" media="screen">
+  <link rel="stylesheet" href="example.css" media="screen">
+  <script src="../src/picturebox.js"></script>
+</head>
+<body>
+  <div class="clearfix">
+    <div class="right">
+      <h1 style="width: 400px">PictureBox example</h1>
+      <p style="border:1px solid #e0e0e0;background-color:#f2f2f2;">
+        $('.picturebox').pictureBox();
+      </p>
+    </div>
+    <div class="left">
+      <div class="picture-box" id="picture-box" data-animation="500" data-number="2">
+        <div class="viewport"></div>
+        <div class="pictures">
+          <ol>
+            <li data-thumb="http://pic1.win4000.com/wallpaper/120*80/513e98e477c24.jpg" data-src="http://pic1.win4000.com/wallpaper/d/513e98e477c24.jpg"></li>
+            <li data-thumb="http://pic1.win4000.com/wallpaper/120*80/513e98c21f6d8.jpg" data-src="http://pic1.win4000.com/wallpaper/d/513e98c21f6d8.jpg"></li>
+            <li data-thumb="http://pic1.win4000.com/wallpaper/120*80/36897.jpg" data-src="http://pic1.win4000.com/wallpaper/3/5142cb53c80ff.jpg"></li>
+            <li data-thumb="http://pic1.win4000.com/wallpaper/120*80/37387.jpg" data-src="http://pic1.win4000.com/wallpaper/b/51555eff1d9ee.jpg"></li>
+            <li data-thumb="http://pic1.win4000.com/wallpaper/120*80/38170.jpg" data-src="http://pic1.win4000.com/wallpaper/b/518325adaa310.jpg"></li>
+            <li data-thumb="http://pic1.win4000.com/wallpaper/120*80/38202.jpg" data-src="http://pic1.win4000.com/wallpaper/e/518718f7b9b83.jpg"></li>
+          </ol>
+        </div>
+        <div class="toolbar">
+          <a class="prev" href="#picture-box" data-slide="prev"></a>
+          <a class="next" href="#picture-box" data-slide="next"></a>
+          <a class="zoom" href="#picture-box" data-zoom="in"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
