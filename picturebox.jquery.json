@@ -2,7 +2,7 @@
   "name": "picturebox",
   "title": "Picture Box",
   "description": "View zoom-in pictures with navigation, user can switch to fullscreen mode to view pictures via arrow keys",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "homepage": "https://github.com/xixilive/picturebox",
   "demo": "http://xixilive.github.io/picturebox-jquery",
   "author": {
