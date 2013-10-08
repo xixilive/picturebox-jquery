@@ -16,6 +16,11 @@ In your web page:
 <link rel="stylesheet" href="dist/picturebox.css" media="screen">
 ```
 
+## Cross-browsers
+
+IE6, IE7, Chrome(28.x), Firefox(22.x) and Opera(12.x) has passed test.
+
+
 ## Examples
 
 [DEMO][gh]
