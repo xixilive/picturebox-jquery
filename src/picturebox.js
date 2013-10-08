@@ -6,7 +6,9 @@
  * Licensed under the MIT license.
  */
 
-;(function($){ "use strict";
+;(function($){
+
+  "use strict";
 
   var PictureBox = function(element, options){
     this.$element = element;
@@ -16,11 +18,8 @@
       return $(el).data();
     });
     this.options = options;
-    this.position = {x:0, y:0};
-    this.intervalId = 0;
     this.zoomStatus = 'out';
     this.currentIndex = parseInt(this.options.number, 10) || 0;
-    this.viewportOffset = this.$viewport.offset();
     this._init();
   };
 
@@ -31,10 +30,13 @@
 
   PictureBox.prototype._init = function(){
     var self = this;
-    self.moveToCoord = function(ex,ey){
+    self.moveToCoord = function(e){
       var img = self.image[0],
-        size = [self.$viewport.innerWidth(), self.$viewport.innerHeight()],
-        ratio = [img.width / size[0] , img.height / size[1]];
+          size = [self.$viewport.innerWidth(), self.$viewport.innerHeight()],
+          offset = self.$viewport.offset(),
+          ratio = [img.width / size[0] , img.height / size[1]], 
+          ex = e.pageX - offset.left, 
+          ey = e.pageY - offset.top;
       return {
         x: Math.min(-1 * ex * ratio[0] + size[0], 0), 
         y: Math.min(-1 * ey * ratio[1] + size[1], 0)
@@ -46,8 +48,12 @@
       var img = self.image[0];
       return {
         x: (size[0] - img.width)/2,
-        y: (size[1] - img.height)/2,
+        y: (size[1] - img.height)/2
       };
+    }
+
+    function bgPosition(coord){
+      return {'background-position': coord.x.toString()+'px '+coord.y.toString()+'px'};
     }
 
     self.image = $('<img>')
@@ -57,48 +63,25 @@
       var center = centerCoord();
       self.$viewport
         .css('background-image','url('+ e.currentTarget.src +')')
-        .css({backgroundPositionX: center.x, backgroundPositionY: center.y});
+        .css(bgPosition(center));
     })
     .on('error', function(){
       self.loading = false;
       self.$viewport.find('.loading').stop().fadeOut(self.options.animation);
     });
 
-    function onRollOver(e){
+    function onMoving(e){
       if(self.loading){ return; }
-      clearInterval(self.intervalId);
-      var p1 = centerCoord(), p2 = self.moveToCoord(e.offsetX, e.offsetY);
-      
-      self.$viewport
-        .css({backgroundPositionX: p1.x, backgroundPositionY: p1.y})
-        .stop().animate({backgroundPositionX: p2.x, backgroundPositionY: p2.y}, self.options.animation, function(){
-          self.position = p2;
-          self.intervalId = setInterval(function(){
-            self.$viewport.css({backgroundPositionX: self.position.x, backgroundPositionY: self.position.y});
-          }, 20);
-          self.$viewport.on('mousemove.pb', function(e2){
-            self.position = self.moveToCoord(e2.offsetX, e2.offsetY);
-          }).on('mouseout.pb', onRollOut);
-        });
-    }
-
-    function onRollOut(){
-      self.$viewport.off('mousemove.pb');
-      self.$viewport.off('mouseover.pb');
-      clearInterval(self.intervalId);
-      var p = centerCoord();
-      self.$viewport.stop().animate({backgroundPositionX: p.x, backgroundPositionY: p.y}, self.options.animation, function(){
-        self.$viewport.on('mouseover.pb', onRollOver);
-      });
+      self.$viewport.css(bgPosition(self.moveToCoord(e)));
     }
 
     this.$pictures.find('li').each(function(){
       $(this).css('background-image', 'url('+$(this).data('thumb')+')')
-        .css({backgroundPositionX: '50%', backgroundPositionY: '50%'})
+        .css('background-position', '50% 50%')
         .css('background-repeat', 'no-repeat');
     });
 
-    this.$viewport.on('mouseover.pb', onRollOver);
+    this.$viewport.on('mousemove.pb', onMoving);
     this.slideTo(this.currentIndex);
   };
 
@@ -233,4 +216,4 @@
     $('.picture-box').pictureBox();
   });
 
-})(window.jQuery);
+})(jQuery);
