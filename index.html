@@ -7,7 +7,10 @@
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="stylesheets/picturebox.css">
     <script src="javascripts/scale.fix.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="javascripts/picturebox.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -26,38 +29,38 @@
         </ul>
 
         <p class="header">This project is maintained by <a class="header name" href="https://github.com/xixilive">xixilive</a></p>
-
-
       </header>
+
       <section>
-        <h1>
-<a name="picturebox" class="anchor" href="#picturebox"><span class="octicon octicon-link"></span></a>Picturebox</h1>
+        <h1>Picturebox</h1>
+        <p>Press ` to zoom-in, and Esc to zoom-out, Arrow keys are avaliable.</p>
 
-<p>View zoom-in pictures with navigation, user can switch to fullscreen mode to view pictures via arrow keys</p>
+        <div class="picture-box" id="picture-box" data-animation="500" data-number="2">
+          <div class="viewport"></div>
+          <div class="pictures">
+            <ol>
+              <li data-thumb="images/s1.jpg" data-src="http://farm4.staticflickr.com/3808/9916080243_d7b57af563_h.jpg"></li>
+              <li data-thumb="images/s2.jpg" data-src="http://farm4.staticflickr.com/3678/9946866823_93b850aef8_b.jpg"></li>
+              <li data-thumb="images/s3.jpg" data-src="http://farm4.staticflickr.com/3808/9947023173_3392dc1d8d_b.jpg"></li>
+              <li data-thumb="images/s4.jpg" data-src="http://farm8.staticflickr.com/7399/9951988363_4786e38287_b.jpg"></li>
+              <li data-thumb="images/s5.jpg" data-src="http://farm3.staticflickr.com/2851/9950415435_5cdd31df57_k.jpg"></li>
+              <li data-thumb="images/s6.jpg" data-src="http://farm8.staticflickr.com/7344/9947494155_39e885f9a5_k.jpg"></li>
+            </ol>
+          </div>
+          <div class="toolbar">
+            <a class="prev" href="#picture-box" data-slide="prev"></a>
+            <a class="next" href="#picture-box" data-slide="next"></a>
+            <a class="zoom" href="#picture-box" data-zoom="in"></a>
+          </div>
+        </div>
 
-<h2>
-<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
-
-<p>Download the <a href="https://raw.github.com/xixilive/picturebox/master/dist/picturebox.min.js">production version</a> or the <a href="https://raw.github.com/xixilive/picturebox/master/dist/picturebox.js">development version</a>.</p>
-
-<p>In your web page:</p>
-
-<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+        <div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"dist/picturebox.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"dist/picturebox.css"</span> <span class="na">media=</span><span class="s">"screen"</span><span class="nt">&gt;</span>
 </pre></div>
 
-<h2>
-<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h2>
+      <p>IE6, IE7, Chrome(28.x), Firefox(22.x) and Opera(12.x) has passed test.</p>
 
-<p><a href="http://xixilive.github.io/picturebox-jquery">DEMO</a></p>
-
-<h2>
-<a name="release-history" class="anchor" href="#release-history"><span class="octicon octicon-link"></span></a>Release History</h2>
-
-<ul>
-<li>2013-09-27  v0.1.0</li>
-</ul>
       </section>
       <footer>
         <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
